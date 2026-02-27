@@ -40,6 +40,8 @@ cd turing
 
 una volta che si è constatato che spring boot è su controllare http://localhost:8091/swagger-ui/index.html per vedere se carica swagger per averne la certezza
 
+per sapere se si è collegato bene al db fare un test su swagger per la login sotto l'api POST /utente/login con ussername Edoardo e password 1234
+
 cd ../fe-rubrica
 
 ./deploy.sh
