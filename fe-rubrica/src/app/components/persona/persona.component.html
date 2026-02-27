@@ -1,0 +1,33 @@
+<tr class="hover:bg-gray-50 transition">
+
+  <td class="px-6 py-4 font-medium text-gray-800">
+    {{ persona.nome }}
+  </td>
+
+  <td class="px-6 py-4">
+    {{ persona.cognome }}
+  </td>
+
+  <td class="px-6 py-4">
+    {{ persona.telefono }}
+  </td>
+
+  <td class="px-6 py-4 text-right space-x-2">
+    <button (click)="onModifica()" class="px-3 py-1 text-sm bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+      Modifica
+    </button>
+    <button (click)="confirmShowDialog()" class="px-3 py-1 text-sm bg-red-500 text-white rounded-lg hover:bg-red-600">
+      Elimina
+    </button>
+  </td>
+
+</tr>
+<app-generic-dialog
+[showConfirm]="showDialog"
+[actionTitle]="'Elimina'"
+[questionDialog]="'Eliminare '+persona.nome+' '+persona.cognome+'?'"
+[dialogTitle]="'Eliminazione'"
+(confirmShowDialog)="confirmShowDialog()"
+(undoShowDialog)="undoShowDialog()"
+(execute)="confirm()"
+/>

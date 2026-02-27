@@ -1,0 +1,74 @@
+<form [formGroup]="contactForm" (submit)="onSubmit()" 
+      class="max-w-xl mx-auto mt-10 bg-white p-8 rounded-2xl shadow-lg space-y-6">
+
+  <h2 class="text-2xl font-bold text-gray-800 text-center">
+    {{ titleForm }}
+  </h2>
+
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Nome</label>
+    <input type="text" formControlName="nome"
+      class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+
+    @if (f.nome.touched && f.nome.invalid) {
+      <p class="text-red-500 text-sm mt-1">
+        Il nome deve essere compreso tra 3 e 50 caratteri
+      </p>
+    }
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Cognome</label>
+    <input type="text" formControlName="cognome"
+      class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+
+    @if (f.cognome.touched && f.cognome.invalid) {
+      <p class="text-red-500 text-sm mt-1">
+        Il cognome deve essere compreso tra 3 e 50 caratteri
+      </p>
+    }
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Indirizzo</label>
+    <input type="text" formControlName="indirizzo"
+      class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+
+    @if (f.indirizzo.touched && f.indirizzo.invalid) {
+      <p class="text-red-500 text-sm mt-1">
+        L'indirizzo deve essere compreso tra 5 e 50 caratteri
+      </p>
+    }
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Telefono</label>
+    <input type="text" formControlName="telefono"
+      class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+
+    @if (f.telefono.touched && f.telefono.invalid) {
+      <p class="text-red-500 text-sm mt-1">
+        Numero di telefono non valido
+      </p>
+    }
+  </div>
+
+  <div>
+    <label class="block text-sm font-medium text-gray-700">Età</label>
+    <input type="number" formControlName="eta"
+      class="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+
+    @if (f.eta.touched && f.eta.invalid) {
+      <p class="text-red-500 text-sm mt-1">
+        Inserisci un'età valida (1–120)
+      </p>
+    }
+  </div>
+
+  <button type="submit" [disabled]="contactForm.invalid"
+    class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold 
+           hover:bg-blue-700 disabled:bg-gray-400 transition">
+    Salva Contatto
+  </button>
+
+</form>
