@@ -19,6 +19,9 @@
 -- Table structure for table `persona`
 --
 
+CREATE DATABASE IF NOT EXISTS rubrica;
+USE rubrica;
+
 DROP TABLE IF EXISTS `persona`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
