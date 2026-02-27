@@ -42,11 +42,16 @@ una volta che si è constatato che spring boot è su controllare http://localhos
 
 per sapere se si è collegato bene al db fare un test su swagger per la login sotto l'api POST /utente/login con ussername Edoardo e password 1234
 
-cd ../fe-rubrica
+
+se terminale occupato dai log di spring aprirne un altro e posizionarsi sul progetto
+
+posizionarsi in /turing/fe-rubrica
 
 ./deploy.sh
 
-una volta che angular sta su le credenziali per il login sono (username e password corrispettivamente):
+una volta che angular sta su accedere a http://localhost:4200 
+
+le credenziali per il login sono (username e password corrispettivamente):
   - Edoardo
   - 1234
 
