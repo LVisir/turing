@@ -1,62 +1,135 @@
-Progetto rubrica
+# 📞 Rubrica Web App
 
-tecnologie:
+Applicazione full-stack REST API per la gestione di una rubrica telefonica, realizzata come esercizio.
 
-angular 18
+---
 
-spring boot 3.5.9
+## 🧰 Tecnologie utilizzate
 
-mysql
+* **Frontend:** Angular 18
+* **Backend:** Spring Boot 3.5.9 (Java 21)
+* **Database:** MySQL
+* **Containerizzazione:** Docker
 
-docker
+---
 
+## ⚙️ Prerequisiti
 
+Prima di avviare il progetto è necessario avere installato:
 
-prerequisiti:
+* Docker
+* MySQL Server
 
-avere docker installato
+---
 
-avere mysql installato
+# 🗄️ Configurazione Database Manuale
 
-posizionarsi sulla cartella del progetto
+## 1️⃣ Importare lo schema MySQL
 
-importare schema_database.sql in mysql
+Dalla root del progetto eseguire:
 
-modificare file turing/src/main/resources/application-docker.properties sotto le seguenti voci nel caso in cui mysql giri su un'altra porta (di default è 3306) e le credenziali per accederci
+```bash
+mysql -u root -p < schema_database.sql
+```
 
-  - spring.datasource.url=jdbc:mysql://host.docker.internal:3306/rubrica?serverTimezone=Europe/Rome
-  - spring.datasource.username=root
-  - spring.datasource.password=1234
+Questo comando creerà automaticamente:
 
+* Database `rubrica`
+* Tabelle
+* Dati iniziali di test
 
+---
 
-come farlo partire:
+## 2️⃣ Configurare le credenziali MySQL
 
+Aprire il file:
+
+```
+turing/src/main/resources/application-docker.properties
+```
+
+Modificare le seguenti proprietà con le credenziali del proprio MySQL:
+
+```properties
+spring.datasource.url=jdbc:mysql://host.docker.internal:3306/rubrica?serverTimezone=Europe/Rome
+spring.datasource.username=root
+spring.datasource.password=1234
+```
+
+⚠️ Se MySQL utilizza una porta diversa da **3306**, modificarla nella URL.
+
+---
+
+# 🚀 Avvio Backend (Spring Boot)
+
+Aprire il terminale nella root del progetto ed eseguire:
+
+```bash
 cd turing
-
 ./docker-build.sh
-
 ./docker-run.sh
+```
 
-una volta che si è constatato che spring boot è su controllare http://localhost:8091/swagger-ui/index.html per vedere se carica swagger per averne la certezza
+Quando il backend sarà avviato correttamente, verificare se swagger sta su aprendo nel browser:
 
-per sapere se si è collegato bene al db fare un test su swagger per la login sotto l'api POST /utente/login con ussername Edoardo e password 1234
+```
+http://localhost:8091/swagger-ui/index.html
+```
 
+---
 
-se terminale occupato dai log di spring aprirne un altro e posizionarsi sul progetto
+## 🔐 Verifica connessione database
 
-posizionarsi in /turing/fe-rubrica
+Da Swagger eseguire la chiamata:
 
+```
+POST /utente/login
+```
+
+Credenziali di test:
+
+```
+username: Edoardo
+password: 1234
+```
+
+Se la richiesta va a buon fine, la connessione al database è configurata correttamente.
+
+---
+
+# 💻 Avvio Frontend (Angular)
+
+Aprire un nuovo terminale e posizionarsi nella cartella frontend:
+
+```bash
+cd turing/fe-rubrica
 ./deploy.sh
+```
 
-una volta che angular sta su accedere a http://localhost:4200 
+Una volta che Angular sta su aprire il browser e accedere a:
 
-le credenziali per il login sono (username e password corrispettivamente):
-  - Edoardo
-  - 1234
+```
+http://localhost:4200
+```
 
-ora si può usare l'app
+---
 
+# 👤 Credenziali di accesso all'applicazione
 
+```
+Username: Edoardo
+Password: 1234
+```
 
+---
 
+# ✅ Applicazione pronta all’uso
+
+Dopo aver completato tutti gli step:
+
+1. Database importato
+2. Credenziali configurate
+3. Backend avviato
+4. Frontend avviato
+
+L’applicazione sarà completamente funzionante e pronta per l’utilizzo.
