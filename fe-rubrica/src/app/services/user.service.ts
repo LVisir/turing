@@ -1,7 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiResponse, LoginResponse } from '../interfaces/api.response';
+import {
+  ApiResponse,
+  LoginResponse,
+  UserLoginDTO,
+  Utente,
+} from '../interfaces/api.response';
 import { API_ENDPOINTS } from '../configs/api-endpoints';
 
 @Injectable({
@@ -17,6 +22,13 @@ export class UserService {
     return this.http.post<ApiResponse<LoginResponse>>(
       API_ENDPOINTS.LOGIN,
       credentials,
+    );
+  }
+
+  register(u: Utente): Observable<ApiResponse<UserLoginDTO>> {
+    return this.http.post<ApiResponse<UserLoginDTO>>(
+      API_ENDPOINTS.REGISTRATION,
+      u,
     );
   }
 }

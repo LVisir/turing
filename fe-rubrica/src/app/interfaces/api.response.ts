@@ -42,3 +42,9 @@ export interface Persona {
   indirizzo: string;
   eta: number;
 }
+
+export interface Utente {
+  id: number | null;
+  username: string;
+  password: string;
+}

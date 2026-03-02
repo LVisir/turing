@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ElementRef,
+  ViewChild,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-generic-dialog',
@@ -8,8 +17,21 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './generic-dialog.component.scss',
 })
 export class GenericDialogComponent {
+  @ViewChild('confirmBtn') confirmBtn!: ElementRef<HTMLButtonElement>;
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['showConfirm']?.currentValue === true) {
+      setTimeout(() => {
+        this.confirmBtn?.nativeElement.focus();
+      });
+    }
+  }
+
   @Input()
   showConfirm: boolean = false;
+
+  @Input()
+  showCancelButton: boolean = true;
 
   @Input()
   actionTitle!: string;

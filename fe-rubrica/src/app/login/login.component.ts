@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { APP_ROUTES } from '../configs/routes';
 import { GenericDialogComponent } from '../components/generic-dialog/generic-dialog.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,22 +12,16 @@ import { GenericDialogComponent } from '../components/generic-dialog/generic-dia
   imports: [FormsModule, GenericDialogComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
+  host: { class: 'contents' },
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   public constructor(
     private router: Router,
     private userService: UserService,
+    private route: ActivatedRoute,
   ) {}
 
   errorMessage: string = 'Errore server';
-
-  ngOnInit(): void {
-    if (localStorage.getItem('token') !== null) {
-      this.router.navigate([APP_ROUTES.HOME], {
-        replaceUrl: true,
-      });
-    }
-  }
 
   username!: string;
   password!: string;
@@ -65,5 +60,11 @@ export class LoginComponent implements OnInit {
 
   confirm() {
     this.showDialog = false;
+  }
+
+  goToRegistrationPage() {
+    this.router.navigate([APP_ROUTES.REGISTRATION], {
+      relativeTo: this.route,
+    });
   }
 }

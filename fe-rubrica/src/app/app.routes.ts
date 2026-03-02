@@ -3,12 +3,27 @@ import { APP_ROUTES } from './configs/routes';
 
 export const routes: Routes = [
   {
-    path: APP_ROUTES.LOGIN,
-    pathMatch: 'full',
+    path: '',
     loadComponent: async () => {
-      const m = await import('./login/login.component');
-      return m.LoginComponent;
+      const m = await import('./auth-layout/auth-layout.component');
+      return m.AuthLayoutComponent;
     },
+    children: [
+      {
+        path: APP_ROUTES.LOGIN,
+        loadComponent: async () => {
+          const m = await import('./login/login.component');
+          return m.LoginComponent;
+        },
+      },
+      {
+        path: APP_ROUTES.REGISTRATION,
+        loadComponent: async () => {
+          const m = await import('./registration/registration.component');
+          return m.RegistrationComponent;
+        },
+      },
+    ],
   },
   {
     path: APP_ROUTES.HOME,

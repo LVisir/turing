@@ -3,4 +3,5 @@ export const APP_ROUTES = {
   HOME: 'home',
   FORM: 'form',
   MODIFICA: 'form/:id',
+  REGISTRATION: 'registration',
 } as const;
