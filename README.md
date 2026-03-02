@@ -121,6 +121,8 @@ Username: Edoardo
 Password: 1234
 ```
 
+Oppure crearne di nuovi registrando un nuovo utente.
+
 ---
 
 # ✅ Applicazione pronta all’uso
