@@ -1,17 +1,19 @@
-
-<div class="flex flex-col bg-gray-300 dark:bg-white border border-blue-400 p-2 rounded space-y-4 mx-4 rounded-lg">
-    <h3 class="text-lg text-center font-semibold">Registration</h3>
-    <form class="flex flex-col space-y-4">
-        <input placeholder="Username" class="border border-gray-400 p-2 rounded" type="text" name="username" [(ngModel)]="username" />
-        <input placeholder="Password" class="border border-gray-400 p-2 rounded" type="password" name="password" [(ngModel)]="password" />
-        <div class="flex">
-            <button (click)="goToLoginPage()" class="cursor-pointer flex-1 py-1 bg-amber-600 hover:bg-amber-900 transition text-white rounded-lg" type="submit" >Cancel</button>
-            <div class="flex-1"></div>
-            <button (click)="registration()" class="cursor-pointer flex-1 py-1 bg-blue-800 hover:bg-blue-900 transition text-white rounded-lg" type="submit" >Register</button>
-        </div>
-    </form>
-</div>
-
+@if(loading) {
+    <app-spinner />
+}@else {
+    <div class="flex flex-col bg-gray-300 dark:bg-white border border-blue-400 p-2 rounded space-y-4 mx-4 rounded-lg">
+        <h3 class="text-lg text-center font-semibold">Registration</h3>
+        <form class="flex flex-col space-y-4">
+            <input placeholder="Username" class="border border-gray-400 p-2 rounded" type="text" name="username" [(ngModel)]="username" />
+            <input placeholder="Password" class="border border-gray-400 p-2 rounded" type="password" name="password" [(ngModel)]="password" />
+            <div class="flex">
+                <button (click)="goToLoginPage()" class="cursor-pointer flex-1 py-1 bg-amber-600 hover:bg-amber-900 transition text-white rounded-lg" type="submit" >Cancel</button>
+                <div class="flex-1"></div>
+                <button (click)="registration()" class="cursor-pointer flex-1 py-1 bg-blue-800 hover:bg-blue-900 transition text-white rounded-lg" type="submit" >Register</button>
+            </div>
+        </form>
+    </div>
+}
 <app-generic-dialog
 [showConfirm]="showDialog"
 [actionTitle]="'Ok'"

@@ -6,11 +6,12 @@ import { ActivatedRoute } from '@angular/router';
 import { API_ENDPOINTS } from '../configs/api-endpoints';
 import { UserService } from '../services/user.service';
 import { APP_ROUTES } from '../configs/routes';
+import { SpinnerComponent } from '../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [GenericDialogComponent, FormsModule],
+  imports: [GenericDialogComponent, FormsModule, SpinnerComponent],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.scss',
   host: { class: 'contents' },
@@ -23,6 +24,8 @@ export class RegistrationComponent {
   ) {}
 
   dialogMessage: string = 'Errore server';
+
+  loading: boolean = false;
 
   errorPresent: boolean = false;
 
@@ -54,16 +57,19 @@ export class RegistrationComponent {
   }
 
   registration() {
+    this.loading = true;
     this.userService
       .register({ id: null, username: this.username, password: this.password })
       .subscribe({
         next: (res) => {
           if (res.success) {
+            this.loading = false;
             this.errorPresent = false;
             this.dialogTitle = 'Success';
             this.dialogMessage = 'Utente creato con successo';
             this.confirmShowDialog();
           } else if (null != res.error) {
+            this.loading = false;
             this.dialogMessage = res.error.message;
             this.errorPresent = true;
             this.dialogTitle = 'Errore';
@@ -71,6 +77,7 @@ export class RegistrationComponent {
           }
         },
         error: (_) => {
+          this.loading = false;
           this.dialogMessage = 'Server Error';
           this.errorPresent = true;
           this.dialogTitle = 'Errore';

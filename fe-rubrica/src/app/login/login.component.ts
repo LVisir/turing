@@ -5,11 +5,12 @@ import { UserService } from '../services/user.service';
 import { APP_ROUTES } from '../configs/routes';
 import { GenericDialogComponent } from '../components/generic-dialog/generic-dialog.component';
 import { ActivatedRoute } from '@angular/router';
+import { SpinnerComponent } from '../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, GenericDialogComponent],
+  imports: [FormsModule, GenericDialogComponent, SpinnerComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   host: { class: 'contents' },
@@ -26,7 +27,11 @@ export class LoginComponent {
   username!: string;
   password!: string;
 
+  loading: boolean = false;
+
   checkCredentials() {
+    this.loading = true;
+
     this.userService
       .login({ username: this.username, password: this.password })
       .subscribe({
@@ -39,9 +44,13 @@ export class LoginComponent {
                 replaceUrl: true,
               });
             }
+          } else {
+            console.log(res.error?.message);
+            this.loading = false;
           }
         },
         error: (e) => {
+          this.loading = false;
           this.errorMessage = e.error.error.message;
           this.confirmShowDialog();
         },

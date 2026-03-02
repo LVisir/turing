@@ -5,11 +5,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PersonaService } from '../services/persona.service';
 import { Persona, PersonaRequestDTO } from '../interfaces/api.response';
 import { APP_ROUTES } from '../configs/routes';
+import { SpinnerComponent } from '../components/spinner/spinner.component';
 
 @Component({
   selector: 'app-form-persona',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, SpinnerComponent],
   templateUrl: './form-persona.component.html',
   styleUrl: './form-persona.component.scss',
 })
@@ -25,7 +26,10 @@ export class FormPersonaComponent implements OnInit {
     private router: Router,
   ) {}
 
+  loading: boolean = true;
+
   ngOnInit() {
+    this.loading = true;
     const id = this.route.snapshot.paramMap.get('id');
 
     if (id) {
@@ -37,18 +41,22 @@ export class FormPersonaComponent implements OnInit {
           if (res.success) {
             if (null !== res.body) {
               this.contactForm.patchValue(res.body);
+              this.loading = false;
             } else {
               // TODO: da implementare cosa fare quando il success della risposta è a false
               console.log(res.error?.message);
+              this.loading = false;
             }
           }
         },
         error: (e) => {
           // TODO: da implementare cosa fare la chiamata non va in porto
           console.log(e);
+          this.loading = false;
         },
       });
     } else {
+      this.loading = false;
       this.titleForm = 'Nuovo Contatto';
     }
   }
@@ -104,6 +112,7 @@ export class FormPersonaComponent implements OnInit {
 
   onSubmit() {
     if (this.contactForm.invalid) return;
+    this.loading = true;
     const p: PersonaRequestDTO = this.contactForm.getRawValue();
 
     if (this.isEditMode && this.personId !== undefined) {
@@ -116,11 +125,13 @@ export class FormPersonaComponent implements OnInit {
             this.router.navigate([APP_ROUTES.HOME]);
           } else {
             console.log(res.error?.message);
+            this.loading = false;
           }
         },
         error: (e) => {
           // TODO: da implementare cosa fare la chiamata non va in porto
           console.log(e);
+          this.loading = false;
         },
       });
     } else {
@@ -133,11 +144,13 @@ export class FormPersonaComponent implements OnInit {
             this.router.navigate([APP_ROUTES.HOME]);
           } else {
             console.log(res.error?.message);
+            this.loading = false;
           }
         },
         error: (e) => {
           // TODO: da implementare cosa fare la chiamata non va in porto
           console.log(e);
+          this.loading = false;
         },
       });
     }
