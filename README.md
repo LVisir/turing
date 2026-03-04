@@ -99,10 +99,10 @@ Se la richiesta va a buon fine, la connessione al database è configurata corret
 
 # 💻 Avvio Frontend (Angular)
 
-Aprire un nuovo terminale e posizionarsi nella cartella frontend:
+Aprire un nuovo terminale e posizionarsi nella root del progetto ed entrare nella cartella frontend:
 
 ```bash
-cd turing/fe-rubrica
+cd fe-rubrica
 ./deploy.sh
 ```
 
